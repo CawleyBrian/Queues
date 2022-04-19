@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -9,9 +11,6 @@ public class Deque<Item> implements Iterable<Item> {
 
     // construct an empty deque
     public Deque() {
-        // both pointers are empty nodes
-        first = new Node();
-        last = new Node();
     }
 
     private class Node {
@@ -22,7 +21,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // is the deque empty?
     public boolean isEmpty() {
-        return first.item == null;
+        return size == 0;
     }
 
     // return the number of items on the deque
@@ -144,10 +143,10 @@ public class Deque<Item> implements Iterable<Item> {
 
     // return an iterator over items in order from front to back
     public Iterator<Item> iterator() {
-        return new ListIterator<Item>();
+        return new ListIterator();
     }
 
-    private class ListIterator<I> implements Iterator<Item> {
+    private class ListIterator implements Iterator<Item> {
         private Node current = first;
 
         public boolean hasNext() {
@@ -170,58 +169,71 @@ public class Deque<Item> implements Iterable<Item> {
 
     // unit testing (required)
     public static void main(String[] args) {
+
+        Deque<Integer> deque = new Deque<>();
+        StdOut.println("has next: " + deque.iterator().hasNext());
+
+        deque.addFirst(1);
+        StdOut.println("has next: " + deque.iterator().hasNext());
+
+        StdOut.println(deque.removeFirst());
+        StdOut.println(deque.isEmpty());
+
+
         // Create new deque, verify it is empty
         Deque<String> testDeque = new Deque<>();
-        System.out.println("Deque should be empty: " + testDeque.isEmpty());
+        StdOut.println("Deque should be empty: " + testDeque.isEmpty());
         // use both first and last
         String first = "one";
         testDeque.addFirst(first);
         String second = "two";
         testDeque.addLast(second);
-        System.out.println(testDeque.first.item);
-        System.out.println(testDeque.first.next.item);
-        System.out.println(testDeque.first.prev);
+        StdOut.println(testDeque.first.item);
+        StdOut.println(testDeque.first.next.item);
+        StdOut.println(testDeque.first.prev);
 
-        System.out.println(testDeque.last.item);
-        System.out.println(testDeque.last.prev.item);
-        System.out.println(testDeque.last.next);
+        StdOut.println(testDeque.last.item);
+        StdOut.println(testDeque.last.prev.item);
+        StdOut.println(testDeque.last.next);
 
         testDeque.addFirst("third");
-        System.out.println("firsts");
-        System.out.println(testDeque.first.item);
-        System.out.println(testDeque.first.next.item);
-        System.out.println(testDeque.first.prev);
-        System.out.println("lasts");
-        System.out.println(testDeque.last.item);
-        System.out.println(testDeque.last.prev.item);
-        System.out.println(testDeque.last.next);
-        System.out.println(testDeque.size());
+        StdOut.println("firsts");
+        StdOut.println(testDeque.first.item);
+        StdOut.println(testDeque.first.next.item);
+        StdOut.println(testDeque.first.prev);
+        StdOut.println("lasts");
+        StdOut.println(testDeque.last.item);
+        StdOut.println(testDeque.last.prev.item);
+        StdOut.println(testDeque.last.next);
+        StdOut.println(testDeque.size());
 
-        System.out.println("Print list");
+        StdOut.println("Print list");
         for (String s : testDeque) {
-            System.out.println(s);
+            StdOut.println(s);
         }
 
         String removedFirst = testDeque.removeFirst();
-        System.out.println(removedFirst);
-        System.out.println(testDeque.size());
-        System.out.println(testDeque.first.item);
-        System.out.println(testDeque.first.next.item);
-        System.out.println(testDeque.first.prev);
+        StdOut.println(removedFirst);
+        StdOut.println(testDeque.size());
+        StdOut.println(testDeque.first.item);
+        StdOut.println(testDeque.first.next.item);
+        StdOut.println(testDeque.first.prev);
 
         String removedfirst = testDeque.removeLast();
-        System.out.println("removed " + removedfirst);
-        System.out.println(testDeque.size());
-        System.out.println(testDeque.first.item);
-        System.out.println(testDeque.last.item);
-        System.out.println(testDeque.first.next);
-        System.out.println(testDeque.first.prev);
-        System.out.println(testDeque.last.prev);
-        System.out.println(testDeque.last.next);
+        StdOut.println("removed " + removedfirst);
+        StdOut.println(testDeque.size());
+        StdOut.println(testDeque.first.item);
+        StdOut.println(testDeque.last.item);
+        StdOut.println(testDeque.first.next);
+        StdOut.println(testDeque.first.prev);
+        StdOut.println(testDeque.last.prev);
+        StdOut.println(testDeque.last.next);
 
         String lastItem = testDeque.removeLast();
-        System.out.println("removed " + lastItem);
-        System.out.println(testDeque.first);
-        System.out.println(testDeque.last);
+        StdOut.println("removed " + lastItem);
+        StdOut.println(testDeque.first);
+        StdOut.println(testDeque.last);
+
+
     }
 }
